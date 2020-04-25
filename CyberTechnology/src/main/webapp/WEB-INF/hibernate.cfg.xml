@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD//EN" 
+"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>
+		<!-- mapping apabila menggunakan annotation -->
+		<mapping class="com.ct.model.User" />
+		<mapping class="com.ct.model.Role" />
+		<mapping class="com.ct.model.AuditLog" />
+		<!-- <mapping class="com.ct.model.Menu" />
+		<mapping class="com.ct.model.Biodata" />
+		<mapping class="com.ct.model.Batch" />
+		<mapping class="com.ct.model.BatchTest" />
+		<mapping class="com.ct.model.Test" />
+		<mapping class="com.ct.model.Clazz" />
+		<mapping class="com.ct.model.Room" />
+		<mapping class="com.ct.model.Technology" />
+		<mapping class="com.ct.model.Trainer" />
+		<mapping class="com.ct.model.BootcampType" />
+		<mapping class="com.ct.model.BootcampTestType" /> -->
+	</session-factory>
+</hibernate-configuration>
