@@ -11,7 +11,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Controller;
 
 @Configuration
-@Controller
 public class PathConfigur {
 
 	public PathConfigur() throws IOException {

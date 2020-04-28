@@ -82,8 +82,8 @@
 							<div class="row">
 								<div class="col-xs-6">
 									<div class="form-group">
-										<input type="text" class="form-control" name="name:string" id="name"
-											placeholder="Name">
+										<input type="text" class="form-control" name="name:string"
+											id="name" placeholder="Name">
 									</div>
 								</div>
 								<div class="col-xs-6">
@@ -214,104 +214,111 @@
 							<h4 class="modal-title">Setup Test</h4>
 						</div>
 						<div class="row">
-								<div class="col-xs-12">
-									<input type="hidden" class="form-control" name="batchId" id="batchId"
-										placeholder="BatchId">
-								</div>
+							<div class="col-xs-12">
+								<input type="hidden" class="form-control" name="batchId"
+									id="batchId" placeholder="BatchId">
 							</div>
+						</div>
 						<div class="modal-body">
 							<div id="setupTest"></div>
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-primary" onclick="simpanSetupTest()">Close</button>
+							<button type="button" class="btn btn-primary"
+								onclick="simpanSetupTest()">Close</button>
 						</div>
 					</div>
 				</div>
 			</div>
 		</form>
-		
+
 	</section>
 
 	<!-- Proses -->
 	<script>
-	var modeSubmit = 'insert';
-	
-	function refreshTabel() {
-		$.ajax({
-			type: 'get',
-			url: 'batch/',
-			data: {
-				name: $('#search').val()
-			},
-			success: function(d) {
-				tabelBatch.clear().draw();
-				$(d).each(function(index, element){
-					tabelBatch.row.add([
-						element.technology.name,
-						element.name,
-						element.trainer.name,
-						'<input class="btn btn-default btn-sm" type="button" value="Edit" data-toggle="modal" data-target="#modalBatch" onclick="loadEdit(\'' + element.id + '\')"> &nbsp;' +
-						'<input class="btn btn-danger btn-sm" type="button" value="Add Participant" data-toggle="modal" data-target="#modalAddParticipant" onclick="loadParticipant(\'' + element.id + '\')"> &nbsp;' +
-						'<input class="btn btn-primary btn-sm" type="button" data-toggle="modal" data-target="#modalSetupTest" value="Setup Test" onclick="loadTest(\'' + element.id + '\')"> '
-					]).draw();
-				})	
-			},
-			error: function(d) {
-				console.log('Error');
-			}
-		});
-	}
+		var modeSubmit = 'insert';
 
-	function loadTest(id) {
-		$.ajax({
-			type: 'GET',
-			url: 'test/',
-			success: function(d) {
-				$('#batchId').val(id);
-				showTest(d);
-			},
-			error: function(d) {
-				console.log('Error - loadTest');
-			}
-		});
-	}
+		function refreshTabel() {
+			$
+					.ajax({
+						type : 'get',
+						url : 'batch/',
+						data : {
+							name : $('#search').val()
+						},
+						success : function(d) {
+							tabelBatch.clear().draw();
+							$(d).each(function(index, element) {tabelBatch.row.add(
+																[
+																		element.technology.name,
+																		element.name,
+																		element.trainer.name,
+																		'<input class="btn btn-default btn-sm" type="button" value="Edit" data-toggle="modal" data-target="#modalBatch" onclick="loadEdit(\''
+																				+ element.id
+																				+ '\')"> &nbsp;'
+																				+ '<input class="btn btn-danger btn-sm" type="button" value="Add Participant" data-toggle="modal" data-target="#modalAddParticipant" onclick="loadParticipant(\''
+																				+ element.id
+																				+ '\')"> &nbsp;'
+																				+ '<input class="btn btn-primary btn-sm" type="button" data-toggle="modal" data-target="#modalSetupTest" value="Setup Test" onclick="loadTest(\''
+																				+ element.id
+																				+ '\')"> ' ])
+														.draw();
+											})
+						},
+						error : function(d) {
+							console.log('Error');
+						}
+					});
+		}
 
-	function showTest(d) {
-		var s = '';
-		$(d).each(function(index, element) {
-			s+= '<div class="row">'+
-					'<div class="col-xs-12">'+
-						'<div class="input-group input-group-sm">'+
-							'<input type="text" class="form-control" value="' + element.name + '" readonly>'+ 
-							'<span class="input-group-btn">'+
-								'<input type="checkbox" value="' + element.id + '" name="testId[]">'+
-							'</span>'+
-						'</div>'+
-					'</div>'+
-				'</div>'
-		});
-		$('#setupTest').html(s);	
-	}
+		function loadTest(id) {
+			$.ajax({
+				type : 'GET',
+				url : 'test/',
+				success : function(d) {
+					$('#batchId').val(id);
+					showTest(d);
+				},
+				error : function(d) {
+					console.log('Error - loadTest');
+				}
+			});
+		}
 
-	function simpanSetupTest() {
-		var data = $('#form-setupTest').serializeJSON();
-		$.ajax({
-			type : 'post',
-			url : 'batchTest/',
-			data : JSON.stringify(data),
-			contentType : 'aplication/json',
-			success : function(d) {
-				refreshTabel();
-				$('#form-batch').trigger("reset");
-				$('#form-batch input[type=hidden]').val('');
-				$('#modalBatch').modal('hide');
-			},
-			error : function(d) {
-				console.log('Error')
-			} 
-		}); 
-	}
+		function showTest(d) {
+			var s = '';
+			$(d)
+					.each(
+							function(index, element) {
+								s += '<div class="row">'
+										+ '<div class="col-xs-12">'
+										+ '<div class="input-group input-group-sm">'
+										+ '<input type="text" class="form-control" value="' + element.name + '" readonly>'
+										+ '<span class="input-group-btn">'
+										+ '<input type="checkbox" value="' + element.id + '" name="testId[]">'
+										+ '</span>' + '</div>' + '</div>'
+										+ '</div>'
+							});
+			$('#setupTest').html(s);
+		}
 
+		function simpanSetupTest() {
+			var data = $('#form-setupTest').serializeJSON();
+			$.ajax({
+				type : 'post',
+				url : 'batchTest/',
+				data : JSON.stringify(data),
+				contentType : 'aplication/json',
+				success : function(d) {
+					refreshTabel();
+					$('#form-batch').trigger("reset");
+					$('#form-batch input[type=hidden]').val('');
+					$('#modalBatch').modal('hide');
+				},
+				error : function(d) {
+					console.log('Error')
+				}
+			});
+		}
 
 		function simpan() {
 			var method;
@@ -336,7 +343,7 @@
 						if (d == 1) {
 							alert("Nama sudah ada!");
 						} else if (d == 2) {
-							modeSubmit = 'insert';	
+							modeSubmit = 'insert';
 							$('#form-batch').trigger("reset");
 							$('#form-batch input[type=hidden]').val('');
 							$('#modalBatch').modal('hide');

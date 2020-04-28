@@ -16,5 +16,14 @@ public class JspController {
 	public String login() {
 		return "login";
 	}
+	@RequestMapping("product")
+	public String product() {
+		return "product";
+	}
+	
+	@RequestMapping("product-sold")
+	public String productSold() {
+		return "product-sold";
+	}
 
 }

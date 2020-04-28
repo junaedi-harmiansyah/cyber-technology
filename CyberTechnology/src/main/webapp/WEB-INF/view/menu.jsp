@@ -22,8 +22,10 @@
 									<span class="glyphicon glyphicon-download-alt"></span>
 								</button>
 								<ul class="dropdown-menu" role="menu">
-								<li><button type="button" class="btn btn-primary" onclick='download()'></button></li>
-									<li><a href="#" class="btn btn-info btn-sm" onclick='download()'>Download</a></li>
+									<li><button type="button" class="btn btn-primary"
+											onclick='download()'></button></li>
+									<li><a href="#" class="btn btn-info btn-sm"
+										onclick='download()'>Download</a></li>
 									<li><a href="#" class="btn btn-info btn-sm">Upload</a></li>
 								</ul>
 							</div>
@@ -249,17 +251,12 @@
 		var modeSubmit = 'insert';
 
 		function refreshTabel() {
-			$
-					.ajax({
-						type : 'get',
-						url : 'menu/',
+			$.ajax({type : 'get', url : 'menu/',
 						success : function(d) {
 							var s = '<option value ="choose" disabled selected>- Choose Menu Parent -</option>'
 									+ '<option value="">Master</option>';
 							tabelMenu.clear().draw();
-							$(d)
-									.each(
-											function(index, element) {
+							$(d).each(function(index, element) {
 												if (element.menuParent == null) {
 													element.menuParentMenu = {
 														title : 'Master'
@@ -411,19 +408,19 @@
 				});
 			}
 		}
-		
+
 		function download(id) {
-				$.ajax({
-					type : 'get',
-					url : 'menu/' + id,
-					success : function(d) {
-						refreshTabel();
-					},
-					error : function(d) {
-						console.log('Error');
-					}
-				});
-		} 
+			$.ajax({
+				type : 'get',
+				url : 'menu/' + id,
+				success : function(d) {
+					refreshTabel();
+				},
+				error : function(d) {
+					console.log('Error');
+				}
+			});
+		}
 
 		var tabelMenu;
 		$(document).ready(function() {

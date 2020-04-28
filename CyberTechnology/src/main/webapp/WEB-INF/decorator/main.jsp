@@ -122,7 +122,7 @@
 									class="img-circle" alt="User Image">
 
 									<p>
-										User login <small>Bootcamp Trainee</small>
+										User login <small> <p id="userLogin"></p></small>
 									</p></li>
 								<!-- Menu Footer-->
 								<li class="user-footer">
@@ -146,10 +146,10 @@
 			<section class="sidebar">
 				<ul class="sidebar-menu">
 					<li><a href="index.jsp"><i class="fa fa-home"></i><span>Home</span></a></li>
-					<li><a href="menu"><i class="fa fa-list"></i><span>Menu</span></a></li>
-					<li><a href="biodata"><i class="fa fa-user"></i><span>Biodata</span></a></li>
+					<li><a href="product"><i class="fa fa-list"></i><span>Product</span></a></li>
+					<!-- <li><a href="biodata"><i class="fa fa-user"></i><span>Biodata</span></a></li>
 					<li><a href="batch"><i class="fa fa-book"></i><span>Batch</span></a></li>
-					<li><a href="clazz"><i class="fa fa-folder"></i><span>Class</span></a></li>
+					<li><a href="clazz"><i class="fa fa-folder"></i><span>Class</span></a></li> -->
 				</ul>
 			</section>
 			<!-- /.sidebar -->
@@ -182,5 +182,21 @@
 		<div class="control-sidebar-bg"></div>
 	</div>
 	<!-- ./wrapper -->
+
+	<script>
+		/* var showUserLogin="developer";
+		document.getElementById("userLogin").innerHTML =showUserLogin; */
+		function loadUser(){
+			var xhttp = new XMLHttpRequest();
+			xhttp.onreadystatechange = function(){
+				if (this.readyState==4 && this.status==200) {
+					document.getElementById("userLogin").innerHTML =this.responseText;
+					
+				}
+			};
+			xhttp.open('GET','user/',true);
+			xhttp.send;
+		}
+	</script>
 </body>
 </html>
