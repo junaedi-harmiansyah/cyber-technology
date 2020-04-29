@@ -18,6 +18,10 @@
 		base-package="com.ct.dao" />
 	<context:component-scan
 		base-package="com.ct.service" />
+	<context:component-scan
+		base-package="com.ct.product.dao" />
+	<context:component-scan
+		base-package="com.ct.product.service" />
 
 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">

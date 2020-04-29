@@ -4,7 +4,7 @@ import java.util.Collection;
 
 import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
-
+import com.ct.dao.AbstractHibernateDao;
 import com.ct.model.User;
 
 

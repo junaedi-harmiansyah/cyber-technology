@@ -122,7 +122,7 @@
 									class="img-circle" alt="User Image">
 
 									<p>
-										User login <small> <p id="userLogin"></p></small>
+										User login <small>developer</small>
 									</p></li>
 								<!-- Menu Footer-->
 								<li class="user-footer">
@@ -183,20 +183,5 @@
 	</div>
 	<!-- ./wrapper -->
 
-	<script>
-		/* var showUserLogin="developer";
-		document.getElementById("userLogin").innerHTML =showUserLogin; */
-		function loadUser(){
-			var xhttp = new XMLHttpRequest();
-			xhttp.onreadystatechange = function(){
-				if (this.readyState==4 && this.status==200) {
-					document.getElementById("userLogin").innerHTML =this.responseText;
-					
-				}
-			};
-			xhttp.open('GET','user/',true);
-			xhttp.send;
-		}
-	</script>
 </body>
 </html>

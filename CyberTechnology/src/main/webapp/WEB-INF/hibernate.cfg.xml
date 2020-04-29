@@ -9,8 +9,8 @@
 		<mapping class="com.ct.model.User" />
 		<mapping class="com.ct.model.Role" />
 		<mapping class="com.ct.model.AuditLog" />
-		<!-- <mapping class="com.ct.model.Menu" />
-		<mapping class="com.ct.model.Biodata" />
+		<mapping class="com.ct.product.model.Product" />
+		<!-- <mapping class="com.ct.model.Biodata" />
 		<mapping class="com.ct.model.Batch" />
 		<mapping class="com.ct.model.BatchTest" />
 		<mapping class="com.ct.model.Test" />
