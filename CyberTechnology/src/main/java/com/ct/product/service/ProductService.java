@@ -8,6 +8,7 @@ public interface ProductService {
 
 	public Collection<Product> findAll();
 
-	public Collection<Product> search(String name);
+	public void save(Product product);
+
 
 }

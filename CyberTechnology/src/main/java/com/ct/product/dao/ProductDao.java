@@ -8,6 +8,7 @@ public interface ProductDao {
 
 	public Collection<Product> findAll();
 
-	public Collection<Product> search(String name);
+	public void save(Product product);
+
 
 }

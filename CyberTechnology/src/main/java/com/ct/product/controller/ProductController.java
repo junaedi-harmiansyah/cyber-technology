@@ -5,9 +5,9 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ct.product.model.Product;
@@ -28,10 +28,11 @@ public class ProductController {
 		return result;
 	}
 	
-	@RequestMapping(value="/", method=RequestMethod.GET)
-	public ResponseEntity<Collection<Product>> search(@RequestParam(value = "name") String name) {
-		Collection<Product> listOfProductByname = productService.search(name);
-		ResponseEntity<Collection<Product>> result = new ResponseEntity<>(listOfProductByname, HttpStatus.OK);
-		return result;
+	@RequestMapping(value = "/save", method =RequestMethod.POST)
+	public void save(@RequestBody Product product) {
+		 productService.save(product);
+		
 	}
+	
+	
 }

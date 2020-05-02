@@ -1,6 +1,7 @@
 package com.ct.product.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -27,55 +28,60 @@ public class Product implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", length = 11, updatable = false, nullable = false)
 	private Integer id;
-	
-	@Column(name = "name", length = 50, nullable = false)
+
+	@Column(name = "name", length = 25, nullable = false)
 	private String name;
-	
-	@Column(name = "status", nullable = true)
-	private Integer status;
-	
-	@Column(name = "count", nullable = false)
-	private Integer count;
-	
+
 	@Column(name = "marketing", length = 50, nullable = false)
 	private String marketing;
-	
-	@Column(name = "period_from", nullable = true)
+
+	@Column(name = "status", nullable = false)
+	private Integer status;
+
+	@Column(name = "selling_price", nullable = false)
+	private BigDecimal sellingPrice;
+
+	@Column(name = "buy_price", nullable = false)
+	private BigDecimal buyPrice;
+
+	@Column(name = "margin", nullable = false)
+	private BigDecimal margin;
+
+	@Column(name = "buy_date", nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss", timezone = "Asia/Jakarta")
-	private Date periodFrom;
-	
-	@Column(name = "period_to", nullable = true)
+	private Date buyDate;
+
+	@Column(name = "selling_date", nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss", timezone = "Asia/Jakarta")
-	private Date periodTo;
-	
-	@Column(name = "created_on", nullable = true)
+	private Date sellingDate;
+
+	@Column(name = "create_by", nullable = false)
+	private String createBy;
+
+	@Column(name = "create_date", nullable = true)
 	@Temporal(TemporalType.TIMESTAMP)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss", timezone = "Asia/Jakarta")
-	private Date createdOn;
-	
-	@Column(name = "modified_on", nullable = true)
+	private Date createDate;
+
+	@Column(name = "modified_by", nullable = false)
+	private String modifiedBy;
+
+	@Column(name = "modified_date", nullable = true)
 	@Temporal(TemporalType.TIMESTAMP)
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss", timezone = "Asia/Jakarta")
-	private Date modifiedOn;
-	
-	@Column(name = "delete_on", nullable = true)
-	@Temporal(TemporalType.TIMESTAMP)
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss", timezone = "Asia/Jakarta")
-	private Date deleteOn;
-	
-	@Column(name = "created_by")
-	private Integer createdBy;
-	
-	@Column(name = "modified_by")
-	private Integer modifiedBy;
-	
-	@Column(name = "delete_by")
-	private Integer deleteBy;
-	
-	@Column(name = "is_delete")
-	private boolean isDelete;
+	private Date modifiedDate;
+
+	@Column(name = "discription", nullable = true)
+	private String discription;
+
+	@Column(name = "is_active", nullable = false)
+	private Integer isActive;
+
+	@Column(name = "marketing_id", nullable = false)
+	private Integer marketingId;
+
 
 	public Integer getId() {
 		return id;
@@ -93,22 +99,6 @@ public class Product implements Serializable {
 		this.name = name;
 	}
 
-	public Integer getStatus() {
-		return status;
-	}
-
-	public void setStatus(Integer status) {
-		this.status = status;
-	}
-
-	public Integer getCount() {
-		return count;
-	}
-
-	public void setCount(Integer count) {
-		this.count = count;
-	}
-
 	public String getMarketing() {
 		return marketing;
 	}
@@ -117,76 +107,110 @@ public class Product implements Serializable {
 		this.marketing = marketing;
 	}
 
-	public Date getPeriodFrom() {
-		return periodFrom;
+	public Integer getStatus() {
+		return status;
 	}
 
-	public void setPeriodFrom(Date periodFrom) {
-		this.periodFrom = periodFrom;
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 
-	public Date getPeriodTo() {
-		return periodTo;
+	public BigDecimal getSellingPrice() {
+		return sellingPrice;
 	}
 
-	public void setPeriodTo(Date periodTo) {
-		this.periodTo = periodTo;
+	public void setSellingPrice(BigDecimal sellingPrice) {
+		this.sellingPrice = sellingPrice;
 	}
 
-	public Date getCreatedOn() {
-		return createdOn;
+	public BigDecimal getBuyPrice() {
+		return buyPrice;
 	}
 
-	public void setCreatedOn(Date createdOn) {
-		this.createdOn = createdOn;
+	public void setBuyPrice(BigDecimal buyPrice) {
+		this.buyPrice = buyPrice;
 	}
 
-	public Date getModifiedOn() {
-		return modifiedOn;
+	public BigDecimal getMargin() {
+		return margin;
 	}
 
-	public void setModifiedOn(Date modifiedOn) {
-		this.modifiedOn = modifiedOn;
+	public void setMargin(BigDecimal margin) {
+		this.margin = margin;
 	}
 
-	public Date getDeleteOn() {
-		return deleteOn;
+	public Date getBuyDate() {
+		return buyDate;
 	}
 
-	public void setDeleteOn(Date deleteOn) {
-		this.deleteOn = deleteOn;
+	public void setBuyDate(Date buyDate) {
+		this.buyDate = buyDate;
 	}
 
-	public Integer getCreatedBy() {
-		return createdBy;
+	public Date getSellingDate() {
+		return sellingDate;
 	}
 
-	public void setCreatedBy(Integer createdBy) {
-		this.createdBy = createdBy;
+	public void setSellingDate(Date sellingDate) {
+		this.sellingDate = sellingDate;
 	}
 
-	public Integer getModifiedBy() {
+	public String getCreateBy() {
+		return createBy;
+	}
+
+	public void setCreateBy(String createBy) {
+		this.createBy = createBy;
+	}
+
+	public Date getCreateDate() {
+		return createDate;
+	}
+
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
+	}
+
+	public String getModifiedBy() {
 		return modifiedBy;
 	}
 
-	public void setModifiedBy(Integer modifiedBy) {
+	public void setModifiedBy(String modifiedBy) {
 		this.modifiedBy = modifiedBy;
 	}
 
-	public Integer getDeleteBy() {
-		return deleteBy;
+	public Date getModifiedDate() {
+		return modifiedDate;
 	}
 
-	public void setDeleteBy(Integer deleteBy) {
-		this.deleteBy = deleteBy;
+	public void setModifiedDate(Date modifiedDate) {
+		this.modifiedDate = modifiedDate;
 	}
 
-	public boolean isDelete() {
-		return isDelete;
+	public String getDiscription() {
+		return discription;
 	}
 
-	public void setDelete(boolean isDelete) {
-		this.isDelete = isDelete;
+	public void setDiscription(String discription) {
+		this.discription = discription;
 	}
 
+	public Integer getIsActive() {
+		return isActive;
+	}
+
+	public void setIsActive(Integer isActive) {
+		this.isActive = isActive;
+	}
+
+	public Integer getMarketingId() {
+		return marketingId;
+	}
+
+	public void setMarketingId(Integer marketingId) {
+		this.marketingId = marketingId;
+	}
+
+	
+	
 }
