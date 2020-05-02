@@ -8,7 +8,7 @@ public interface ProductService {
 
 	public Collection<Product> findAll();
 
-	public void save(Product product);
+	public Integer save(Product product);
 
 
 }

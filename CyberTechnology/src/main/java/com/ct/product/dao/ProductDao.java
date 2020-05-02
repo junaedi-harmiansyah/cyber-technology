@@ -10,5 +10,7 @@ public interface ProductDao {
 
 	public void save(Product product);
 
+	public Collection<Product> search(String name);
+
 
 }

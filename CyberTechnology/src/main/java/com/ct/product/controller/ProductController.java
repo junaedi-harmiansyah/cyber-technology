@@ -29,9 +29,9 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value = "/save", method =RequestMethod.POST)
-	public void save(@RequestBody Product product) {
-		 productService.save(product);
-		
+	public Integer save(@RequestBody Product product) {
+		Integer result = productService.save(product);
+		return result;
 	}
 	
 	

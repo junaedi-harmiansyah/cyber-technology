@@ -110,7 +110,7 @@
 											<div class="input-group-addon">
 												<i class="fa fa-calendar"></i>
 											</div>
-											<input type="text" class="form-control" name="buyDate"
+											<input type="text" class="form-control" name="buy_date"
 												id="buyDate" placeholder="Buy Date">
 										</div>
 									</div>
@@ -121,7 +121,7 @@
 											<div class="input-group-addon">
 												<i class="fa fa-calendar"></i>
 											</div>
-											<input type="text" class="form-control" name="sellingDate"
+											<input type="text" class="form-control" name="selling_date"
 												id="sellingDate" placeholder="Selling Date">
 										</div>
 									</div>
@@ -241,6 +241,7 @@
 					data : JSON.stringify(data),
 					contentType : 'application/json',
 					success : function (d) {
+						console.log(data)
 						refreshTabel();
 						if (d==1) {
 							alert("Nama sudah terdaftar");

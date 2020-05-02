@@ -27,7 +27,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public void save(Product product) {
+	public Integer save(Product product) {
 		product.setCreateBy("developer");
 		product.setCreateDate(new Date());
 		product.setIsActive(1);
@@ -45,7 +45,27 @@ public class ProductServiceImpl implements ProductService {
 		product.setModifiedDate(new Date());
 		product.setStatus(1);
 		product.setId(null);
-		productDao.save(product);
+		
+		
+		Integer countName = this.checkName(product.getName());
+		if (countName > 0) {
+			product.setName(product.getName());
+			return 1;
+		} else {
+			productDao.save(product);
+			return 2;
+		}
+	}
+
+	private Integer checkName(String name) {
+		Collection<Product> list = productDao.search(name);
+		Integer countName = 0;
+		if (list == null) {
+			countName = 0;
+		} else {
+			countName = list.size();
+		}
+		return countName;
 	}
 
 }
