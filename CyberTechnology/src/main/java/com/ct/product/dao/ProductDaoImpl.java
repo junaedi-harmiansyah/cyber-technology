@@ -8,6 +8,10 @@ import org.springframework.stereotype.Repository;
 import com.ct.dao.AbstractHibernateDao;
 import com.ct.product.model.Product;
 
+/**
+ * @author ZenBook
+ *
+ */
 @Repository
 public class ProductDaoImpl extends AbstractHibernateDao<Product> implements ProductDao {
 
@@ -15,6 +19,7 @@ public class ProductDaoImpl extends AbstractHibernateDao<Product> implements Pro
 		setClazz(Product.class);
 	}
 
+	// To do search name duplicate in database
 	@Override
 	public Collection<Product> search(String name) {
 		StringBuilder sql = new StringBuilder();

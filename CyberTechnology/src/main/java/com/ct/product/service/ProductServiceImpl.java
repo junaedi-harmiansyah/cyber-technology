@@ -18,7 +18,6 @@ public class ProductServiceImpl implements ProductService {
 	@Autowired
 	private ProductDao productDao;
 
-
 	@Override
 	public Collection<Product> findAll() {
 		return productDao.findAll();
@@ -70,6 +69,36 @@ public class ProductServiceImpl implements ProductService {
 			countName = list.size();
 		}
 		return countName;
+	}
+
+	@Override
+	public Product update(Product product) {
+		product.setModifiedBy("developer");
+		product.setModifiedDate(new Date());
+		product.setStatus(1);
+		if (product.getMarketingId() != null) {
+			if (product.getMarketingId() == 1) {
+				product.setMarketing("OLX");
+			} else if (product.getMarketingId() == 2) {
+				product.setMarketing("BUKA LAPAK");
+			} else if (product.getMarketingId() == 3) {
+				product.setMarketing("TOKO PEDIA");
+			} else {
+				product.setMarketing("LAIN-LAIN");
+			}
+
+		}
+		if (product.getBuyPrice() != null && product.getSellingPrice() != null) {
+			BigDecimal result = product.getSellingPrice().subtract(product.getBuyPrice());
+			product.setMargin(result);
+		}
+		productDao.update(product);
+		return product;
+	}
+
+	@Override
+	public Product findOne(Integer id) {
+		return productDao.findOne(id);
 	}
 
 }

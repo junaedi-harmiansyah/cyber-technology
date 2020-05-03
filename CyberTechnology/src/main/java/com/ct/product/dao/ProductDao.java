@@ -12,5 +12,9 @@ public interface ProductDao {
 
 	public Collection<Product> search(String name);
 
+	public Product update(Product product);
+
+	public Product findOne(Integer id);
+
 
 }

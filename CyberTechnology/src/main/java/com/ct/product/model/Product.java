@@ -57,7 +57,7 @@ public class Product implements Serializable {
 	@JsonFormat(pattern="yyyy-MM-dd", timezone="Asia/Jakarta")
 	private Date sellingDate;
 
-	@Column(name = "create_by", nullable = false)
+	@Column(name = "create_by", nullable = true)
 	private String createBy;
 
 	@Column(name = "create_date", nullable = true)
@@ -65,7 +65,7 @@ public class Product implements Serializable {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss", timezone = "Asia/Jakarta")
 	private Date createDate;
 
-	@Column(name = "modified_by", nullable = false)
+	@Column(name = "modified_by", nullable = true)
 	private String modifiedBy;
 
 	@Column(name = "modified_date", nullable = true)

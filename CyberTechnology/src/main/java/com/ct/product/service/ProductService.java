@@ -10,5 +10,9 @@ public interface ProductService {
 
 	public Integer save(Product product);
 
+	public Product update(Product product);
+
+	public Product findOne(Integer id);
+
 
 }

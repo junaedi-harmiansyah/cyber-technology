@@ -81,7 +81,7 @@
 											<option label="OLX" value="1" />
 											<option label="BUKA LAPAK" value="2" />
 											<option label="TOKO PEDIA" value="3" />
-											<option label="Lain-Lain" value="4" />
+											<option label="LAIN-LAIN" value="4" />
 										</select>
 									</div>
 								</div>
@@ -142,7 +142,7 @@
 							<button type="button" class="btn btn-default pull-left"
 								data-dismiss="modal">Cancel</button>
 
-							<button type="button" class="btn btn-primary" onclick="simpan()">Save</button>
+							<button type="button" class="btn btn-primary" onclick="save()">Save</button>
 						</div>
 					</div>
 				</div>
@@ -172,7 +172,7 @@
 								<button type="button" class="btn btn-default pull-left"
 									data-dismiss="modal">Cancel</button>
 								<button type="button" class="btn btn-primary"
-									onclick="simpanTerjual()">Ok</button>
+									onclick="saveTerjual()">Ok</button>
 							</div>
 						</div>
 					</div>
@@ -241,22 +241,44 @@
 					});
 		}
 
-		function simpan() {
+		function loadEdit(id) {
+			$.ajax({
+				type : 'GET',
+				url : 'product/' + id,
+				success : function(d) {
+					refreshTabel();
+					$('#id').val(d.id);
+					$('#name').val(d.name);
+					$('#marketingId').val(d.marketingId);
+					$('#buyPrice').val(d.buyPrice);
+					$('#sellingPrice').val(d.sellingPrice);
+					$('#buyDate').val(d.buyDate);
+					$('#sellingDate').val(d.sellingDate);
+					$('#discription').val(d.discription);
+					modeSubmit = 'update';
+				},
+				error : function(d) {
+					console.log(error.message)
+				}
+			});
+		}
+
+		function save() {
 			var method;
 			if (modeSubmit == 'insert') {
 				var data = $('#form-product').serializeJSON();
-				method = 'post';
+				method = 'POST';
 			} else {
 				var data = $('#form-product').serializeJSON();
 				$('#modalProduct').modal('hide');
-				method = 'put';
+				method = 'PUT';
 			}
 			if ($('#buyDate').val() > $('#sellingDate').val()) {
 				alert("Tanggal pembelian melebihi tanggal penjualan");
 			} else {
 				$.ajax({
 					type : method,
-					url : 'product/save',
+					url : 'product/',
 					data : JSON.stringify(data),
 					contentType : 'application/json',
 					success : function(d) {
