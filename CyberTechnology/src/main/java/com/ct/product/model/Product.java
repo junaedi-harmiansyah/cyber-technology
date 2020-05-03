@@ -49,12 +49,12 @@ public class Product implements Serializable {
 
 	@Column(name = "buy_date", nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss", timezone = "Asia/Jakarta")
+	@JsonFormat(pattern="yyyy-MM-dd", timezone="Asia/Jakarta")
 	private Date buyDate;
 
 	@Column(name = "selling_date", nullable = false)
 	@Temporal(TemporalType.TIMESTAMP)
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss", timezone = "Asia/Jakarta")
+	@JsonFormat(pattern="yyyy-MM-dd", timezone="Asia/Jakarta")
 	private Date sellingDate;
 
 	@Column(name = "create_by", nullable = false)

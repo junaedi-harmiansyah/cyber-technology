@@ -17,8 +17,12 @@ public class ProductDaoImpl extends AbstractHibernateDao<Product> implements Pro
 
 	@Override
 	public Collection<Product> search(String name) {
-		String hql = " FROM Product B ";
-		Query q = getCurrentSession().createQuery(hql);
+		StringBuilder sql = new StringBuilder();
+		sql.append(" FROM Product p ");
+		if (name != null && !name.equalsIgnoreCase("")) {
+			sql.append(" WHERE p.name = '" + name + "'");
+		}
+		Query q = getCurrentSession().createQuery(sql.toString());
 		Collection<Product> result = q.list();
 		return result;
 	}

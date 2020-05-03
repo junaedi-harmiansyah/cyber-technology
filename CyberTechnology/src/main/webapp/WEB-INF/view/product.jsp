@@ -82,7 +82,7 @@
 								<div class="col-xs-6">
 									<div class="form-group">
 										<select class="custom-select d-block w-100 form-control"
-											name="marketing:string" id="marketingId">
+											name="marketing:number" id="marketingId">
 										</select>
 									</div>
 								</div>
@@ -91,14 +91,14 @@
 								<div class="col-xs-6">
 									<div class="form-group">
 										<input type="number" class="form-control"
-											name="selling_prince:string" id="sellingPrice"
+											name="sellingPrice:number" id="sellingPrice"
 											placeholder="input selling prince">
 									</div>
 								</div>
 								<div class="col-xs-6">
 									<div class="form-group">
 										<input type="number" class="form-control"
-											name="buy_prince:string" id="buyPrice"
+											name="buyPrice:number" id="buyPrice"
 											placeholder="input buy prince">
 									</div>
 								</div>
@@ -110,7 +110,7 @@
 											<div class="input-group-addon">
 												<i class="fa fa-calendar"></i>
 											</div>
-											<input type="text" class="form-control" name="buy_date"
+											<input type="text" class="form-control" name="buyDate"
 												id="buyDate" placeholder="Buy Date">
 										</div>
 									</div>
@@ -121,7 +121,7 @@
 											<div class="input-group-addon">
 												<i class="fa fa-calendar"></i>
 											</div>
-											<input type="text" class="form-control" name="selling_date"
+											<input type="text" class="form-control" name="sellingDate"
 												id="sellingDate" placeholder="Selling Date">
 										</div>
 									</div>
@@ -130,16 +130,24 @@
 							<div class="row">
 								<div class="col-xs-6">
 									<div class="form-group">
-										<textarea class="form-control" rows="2" name="description:string"
-											id="description" placeholder="Description"></textarea>
+										<textarea class="form-control" rows="2"
+											name="discription:string" id="discription"
+											placeholder="Description"></textarea>
 									</div>
 								</div>
 							</div>
 						</div>
+
 						<div class="modal-footer">
+
 							<button type="button" class="btn btn-default pull-left"
 								data-dismiss="modal">Cancel</button>
-							<button type="button" class="btn btn-primary" onclick="simpan()">Save</button>
+							<!-- <button type="button" class="btn btn-primary" onclick="simpan()"
+								on>Save</button>
+ -->
+
+							<button type="button" class="btn btn-primary" onloadstart=""
+								onclick="simpan()" id="btnFetch">Save</button>
 						</div>
 					</div>
 				</div>
@@ -177,8 +185,24 @@
 			</div>
 		</form>
 	</section>
-
+	<!-- <dialog id="myDialog">This is a dialog window</dialog> -->
 	<script type="text/javascript">
+	/* <script>
+	function myFunction() { 
+	  document.getElementById("myDialog").showModal(); 
+	} */ 
+		$(document)
+				.ready(
+						function() {
+							$("#btnFetch")
+									.click(
+											function() {
+												$(this).prop("disabled", true);
+												$(this)
+														.html(
+																`<div class="lds-roller"><div></div><div></div><div></div><div>`);
+											});
+						});
 		var modeSubmit = 'insert';
 		var date = new Date();
 		function refreshTabel() {
@@ -221,31 +245,31 @@
 						}
 					});
 		}
-		
+
 		function simpan() {
 			var method;
 			if (modeSubmit == 'insert') {
-					var data = $('#form-product').serializeJSON();
-					method = 'post';
-			}else {
+				var data = $('#form-product').serializeJSON();
+				method = 'post';
+			} else {
 				var data = $('#form-product').serializeJSON();
 				$('#modalProduct').modal('hide');
 				method = 'put';
 			}
 			if ($('#buyDate').val() > $('#sellingDate').val()) {
 				alert("Tanggal pembelian melebihi tanggal penjualan");
-			}else {
+			} else {
 				$.ajax({
 					type : method,
-					url :'product/save',
+					url : 'product/save',
 					data : JSON.stringify(data),
 					contentType : 'application/json',
-					success : function (d) {
+					success : function(d) {
 						console.log(data)
 						refreshTabel();
-						if (d==1) {
+						if (d == 1) {
 							alert("Nama sudah terdaftar");
-						}else if (d==2) {
+						} else if (d == 2) {
 							modeSubmit = 'insert';
 							$('#form-product').trigger("reset");
 							$('#form-product input[type=hidden]').val('');
@@ -253,24 +277,25 @@
 						}
 						if (method == 'post') {
 							$.notify("Input Success", "success");
+
 						}
 						if (method == 'put') {
 							$.notify("Edit Success", "success");
 						}
 					},
-					error : function (d) {
+					error : function(d) {
 						console.log(error.message)
 					}
 				});
 			}
 		}
-		
+
 		function insert() {
 			modeSubmit = 'insert';
 			$('#form-product').trigger("reset");
 			$('#form-product input[type=hidden]').val('');
 		}
-		
+
 		var tableProduct;
 		$(document).ready(function() {
 			tableProduct = $('#table-product').DataTable({
@@ -288,7 +313,6 @@
 			});
 			refreshTabel();
 		});
-
 	</script>
 </body>
 </html>

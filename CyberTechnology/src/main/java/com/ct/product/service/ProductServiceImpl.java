@@ -44,9 +44,8 @@ public class ProductServiceImpl implements ProductService {
 		product.setModifiedBy("developer");
 		product.setModifiedDate(new Date());
 		product.setStatus(1);
-		product.setId(null);
-		
-		
+		product.setMarketing("OLX");
+		product.setMarketingId(1);
 		Integer countName = this.checkName(product.getName());
 		if (countName > 0) {
 			product.setName(product.getName());
