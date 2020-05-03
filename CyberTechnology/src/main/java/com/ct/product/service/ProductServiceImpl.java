@@ -17,9 +17,7 @@ public class ProductServiceImpl implements ProductService {
 
 	@Autowired
 	private ProductDao productDao;
-	
-	//@Autowired
-	//dao market
+
 
 	@Override
 	public Collection<Product> findAll() {
@@ -35,17 +33,24 @@ public class ProductServiceImpl implements ProductService {
 			BigDecimal result = product.getSellingPrice().subtract(product.getBuyPrice());
 			product.setMargin(result);
 		}
-		/*
-		 * if (product.getMarketing() != null &&
-		 * !product.getMarketing().equalsIgnoreCase("")) { Integer idMarket =
-		 * productDao.retrieveIdByNameMarket(product.getMarketing().trim().toLowerCase()
-		 * ); }
-		 */
+
+		if (product.getMarketingId() != null) {
+			if (product.getMarketingId() == 1) {
+				product.setMarketing("OLX");
+			} else if (product.getMarketingId() == 2) {
+				product.setMarketing("BUKA LAPAK");
+			} else if (product.getMarketingId() == 3) {
+				product.setMarketing("TOKO PEDIA");
+			} else {
+				product.setMarketing("LAIN-LAIN");
+			}
+
+		}
+
 		product.setModifiedBy("developer");
 		product.setModifiedDate(new Date());
 		product.setStatus(1);
-		product.setMarketing("OLX");
-		product.setMarketingId(1);
+
 		Integer countName = this.checkName(product.getName());
 		if (countName > 0) {
 			product.setName(product.getName());

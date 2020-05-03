@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>WELCOME TO HOME</title>
+<title>Juna Application</title>
 </head>
 <body>
 	<div>

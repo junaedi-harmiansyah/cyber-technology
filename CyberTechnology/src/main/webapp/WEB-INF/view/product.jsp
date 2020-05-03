@@ -66,12 +66,6 @@
 							<h4 class="modal-title">Product</h4>
 						</div>
 						<div class="modal-body">
-							<!-- <div class="row">
-								<div class="col-xs-12">
-									<input type="hidden" class="form-control" name="id" id="id"
-										placeholder="id">
-								</div>
-							</div> -->
 							<div class="row">
 								<div class="col-xs-6">
 									<div class="form-group">
@@ -82,7 +76,12 @@
 								<div class="col-xs-6">
 									<div class="form-group">
 										<select class="custom-select d-block w-100 form-control"
-											name="marketing:number" id="marketingId">
+											name="marketingId:number" id="marketingId">
+											<option label="--Pilih--" value="null" />
+											<option label="OLX" value="1" />
+											<option label="BUKA LAPAK" value="2" />
+											<option label="TOKO PEDIA" value="3" />
+											<option label="Lain-Lain" value="4" />
 										</select>
 									</div>
 								</div>
@@ -91,15 +90,15 @@
 								<div class="col-xs-6">
 									<div class="form-group">
 										<input type="number" class="form-control"
-											name="sellingPrice:number" id="sellingPrice"
-											placeholder="input selling prince">
+											name="buyPrice:number" id="buyPrice"
+											placeholder="Input Buy Prince">
 									</div>
 								</div>
 								<div class="col-xs-6">
 									<div class="form-group">
 										<input type="number" class="form-control"
-											name="buyPrice:number" id="buyPrice"
-											placeholder="input buy prince">
+											name="sellingPrice:number" id="sellingPrice"
+											placeholder="Input Selling Prince">
 									</div>
 								</div>
 							</div>
@@ -142,12 +141,8 @@
 
 							<button type="button" class="btn btn-default pull-left"
 								data-dismiss="modal">Cancel</button>
-							<!-- <button type="button" class="btn btn-primary" onclick="simpan()"
-								on>Save</button>
- -->
 
-							<button type="button" class="btn btn-primary" onloadstart=""
-								onclick="simpan()" id="btnFetch">Save</button>
+							<button type="button" class="btn btn-primary" onclick="simpan()">Save</button>
 						</div>
 					</div>
 				</div>
@@ -187,10 +182,10 @@
 	</section>
 	<!-- <dialog id="myDialog">This is a dialog window</dialog> -->
 	<script type="text/javascript">
-	/* <script>
-	function myFunction() { 
-	  document.getElementById("myDialog").showModal(); 
-	} */ 
+		/* <script>
+		function myFunction() { 
+		  document.getElementById("myDialog").showModal(); 
+		} */
 		$(document)
 				.ready(
 						function() {
