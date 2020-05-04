@@ -16,5 +16,7 @@ public interface ProductDao {
 
 	public Product findOne(Integer id);
 
+	public Collection<Product> countMarketplace();
+
 
 }

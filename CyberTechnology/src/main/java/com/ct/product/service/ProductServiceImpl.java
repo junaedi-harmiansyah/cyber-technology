@@ -22,6 +22,7 @@ public class ProductServiceImpl implements ProductService {
 	public Collection<Product> findAll() {
 		return productDao.findAll();
 	}
+	
 
 	@Override
 	public Integer save(Product product) {
@@ -99,6 +100,10 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public Product findOne(Integer id) {
 		return productDao.findOne(id);
+	}
+	@Override
+	public Collection<Product> countMarketplace() {
+		return productDao.countMarketplace();
 	}
 
 }

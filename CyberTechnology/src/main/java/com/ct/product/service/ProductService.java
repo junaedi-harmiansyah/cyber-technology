@@ -14,5 +14,7 @@ public interface ProductService {
 
 	public Product findOne(Integer id);
 
+	public Collection<Product> countMarketplace();
+
 
 }

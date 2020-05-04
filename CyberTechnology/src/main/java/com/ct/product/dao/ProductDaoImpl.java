@@ -31,5 +31,16 @@ public class ProductDaoImpl extends AbstractHibernateDao<Product> implements Pro
 		Collection<Product> result = q.list();
 		return result;
 	}
+	
+	@Override
+	public Collection<Product> countMarketplace() {
+
+		StringBuilder sql = new StringBuilder();
+		sql.append(" SELECT p.marketing, COUNT(p.marketing) FROM public.product p GROUP BY  p.marketing ");
+		Query q = getCurrentSession().createQuery(sql.toString());
+		Collection<Product> result = q.list();
+		return result;
+
+	}
 
 }

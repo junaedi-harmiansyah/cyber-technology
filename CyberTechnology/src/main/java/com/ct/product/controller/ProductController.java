@@ -52,4 +52,11 @@ public class ProductController {
 		return result;
 	}
 
+	@RequestMapping(value = "/countMarketplace", method = RequestMethod.GET)
+	public ResponseEntity<Collection<Product>> countMarketplace() {
+		Collection<Product> listOfProduct = productService.countMarketplace();
+		ResponseEntity<Collection<Product>> result = new ResponseEntity<Collection<Product>>(listOfProduct,
+				HttpStatus.OK);
+		return result;
+	}
 }
