@@ -67,6 +67,12 @@
 						</div>
 						<div class="modal-body">
 							<div class="row">
+								<div class="col-xs-12">
+									<input type="hidden" class="form-control" name="id" id="id"
+										placeholder="id">
+								</div>
+							</div>
+							<div class="row">
 								<div class="col-xs-6">
 									<div class="form-group">
 										<input type="text" class="form-control" name="name:string"

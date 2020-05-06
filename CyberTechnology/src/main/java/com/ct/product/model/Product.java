@@ -73,7 +73,7 @@ public class Product implements Serializable {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd hh:mm:ss", timezone = "Asia/Jakarta")
 	private Date modifiedDate;
 
-	@Column(name = "discription", nullable = true)
+	@Column(name = "discription", nullable = true, length = 100)
 	private String discription;
 
 	@Column(name = "is_active", nullable = false)

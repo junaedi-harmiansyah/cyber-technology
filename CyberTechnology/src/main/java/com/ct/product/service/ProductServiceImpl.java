@@ -22,7 +22,6 @@ public class ProductServiceImpl implements ProductService {
 	public Collection<Product> findAll() {
 		return productDao.findAll();
 	}
-	
 
 	@Override
 	public Integer save(Product product) {
@@ -74,33 +73,42 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public Product update(Product product) {
-		product.setModifiedBy("developer");
-		product.setModifiedDate(new Date());
-		product.setStatus(1);
+		Product productBefore = productDao.findOne(product.getId());
+
+		productBefore.setModifiedBy("developer");
+		productBefore.setModifiedDate(new Date());
+		productBefore.setBuyDate(product.getBuyDate());
+		productBefore.setDiscription(product.getDiscription());
+		productBefore.setBuyPrice(product.getBuyPrice());
+		productBefore.setMarketingId(product.getMarketingId());
+		productBefore.setName(product.getName());
+		productBefore.setSellingDate(product.getSellingDate());
+		productBefore.setSellingPrice(product.getSellingPrice());
 		if (product.getMarketingId() != null) {
 			if (product.getMarketingId() == 1) {
-				product.setMarketing("OLX");
+				productBefore.setMarketing("OLX");
 			} else if (product.getMarketingId() == 2) {
-				product.setMarketing("BUKA LAPAK");
+				productBefore.setMarketing("BUKA LAPAK");
 			} else if (product.getMarketingId() == 3) {
-				product.setMarketing("TOKO PEDIA");
+				productBefore.setMarketing("TOKO PEDIA");
 			} else {
-				product.setMarketing("LAIN-LAIN");
+				productBefore.setMarketing("LAIN-LAIN");
 			}
 
 		}
 		if (product.getBuyPrice() != null && product.getSellingPrice() != null) {
 			BigDecimal result = product.getSellingPrice().subtract(product.getBuyPrice());
-			product.setMargin(result);
+			productBefore.setMargin(result);
 		}
-		productDao.update(product);
-		return product;
+		productDao.update(productBefore);
+		return productBefore;
 	}
 
 	@Override
 	public Product findOne(Integer id) {
 		return productDao.findOne(id);
 	}
+
 	@Override
 	public Collection<Product> countMarketplace() {
 		return productDao.countMarketplace();
