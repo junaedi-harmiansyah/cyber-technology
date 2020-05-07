@@ -1,3 +1,5 @@
+<%@page import="java.util.GregorianCalendar"%>
+<%@page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -59,10 +61,10 @@
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal"
+							<!-- <button type="button" class="close" data-dismiss="modal"
 								aria-label="Close">
 								<span aria-hidden="true">&times;</span>
-							</button>
+							</button> -->
 							<h4 class="modal-title">Product</h4>
 						</div>
 						<div class="modal-body">
@@ -76,14 +78,14 @@
 								<div class="col-xs-6">
 									<div class="form-group">
 										<input type="text" class="form-control" name="name:string"
-											id="name" placeholder="Name">
+											id="name" placeholder="Name" maxlength="30">
 									</div>
 								</div>
 								<div class="col-xs-6">
 									<div class="form-group">
 										<select class="custom-select d-block w-100 form-control"
 											name="marketingId:number" id="marketingId">
-											<option label="--Pilih--" value="null" />
+											<option label="--Pilih--" />
 											<option label="OLX" value="1" />
 											<option label="BUKA LAPAK" value="2" />
 											<option label="TOKO PEDIA" value="3" />
@@ -97,14 +99,14 @@
 									<div class="form-group">
 										<input type="number" class="form-control"
 											name="buyPrice:number" id="buyPrice"
-											placeholder="Input Buy Prince">
+											placeholder="Input Buy Prince" min="0" max="1000000000">
 									</div>
 								</div>
 								<div class="col-xs-6">
 									<div class="form-group">
 										<input type="number" class="form-control"
 											name="sellingPrice:number" id="sellingPrice"
-											placeholder="Input Selling Prince">
+											placeholder="Input Selling Prince" min="0" max="1000000000">
 									</div>
 								</div>
 							</div>
@@ -116,7 +118,7 @@
 												<i class="fa fa-calendar"></i>
 											</div>
 											<input type="text" class="form-control" name="buyDate"
-												id="buyDate" placeholder="Buy Date">
+												readonly="readonly" id="buyDate" placeholder="Buy Date">
 										</div>
 									</div>
 								</div>
@@ -127,7 +129,8 @@
 												<i class="fa fa-calendar"></i>
 											</div>
 											<input type="text" class="form-control" name="sellingDate"
-												id="sellingDate" placeholder="Selling Date">
+												readonly="readonly" id="sellingDate"
+												placeholder="Selling Date">
 										</div>
 									</div>
 								</div>
@@ -137,7 +140,7 @@
 									<div class="form-group">
 										<textarea class="form-control" rows="2"
 											name="discription:string" id="discription"
-											placeholder="Description"></textarea>
+											placeholder="Description" maxlength="250"></textarea>
 									</div>
 								</div>
 							</div>
@@ -159,12 +162,14 @@
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal"
-								aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button>
 							<h4 class="modal-title">Product</h4>
 							<div class="modal-body">
+								<div class="row">
+									<div class="col-xs-12">
+										<input type="number" class="form-control" name="id" id="id"
+											placeholder="id">
+									</div>
+								</div>
 								<div class="row">
 									<div class="col-xs-12">
 										<center>
@@ -186,12 +191,7 @@
 			</div>
 		</form>
 	</section>
-	<!-- <dialog id="myDialog">This is a dialog window</dialog> -->
 	<script type="text/javascript">
-		/* <script>
-		function myFunction() { 
-		  document.getElementById("myDialog").showModal(); 
-		} */
 		$(document)
 				.ready(
 						function() {
@@ -235,7 +235,7 @@
 																		'<center><input class="btn btn-default btn-sm" type="button" value="Edit" data-toggle="modal" data-target="#modalProduct" onclick="loadEdit (\''
 																				+ element.id
 																				+ '\')"> &nbsp;'
-																				+ '<input class="btn btn-default btn-sm" type="button" value="Terjual" data-toggle="modal" data-target="#modalProductTerjual" onclick="setTerjual(\''
+																				+ '<input class="btn btn-default btn-sm" type="button" value="Terjual" data-toggle="modal" data-target="#modalProductTerjual" onclick="loadEdit(\''
 																				+ element.id
 																				+ '\')"> &nbsp;</center>' ])
 														.draw();
@@ -269,6 +269,23 @@
 			});
 		}
 
+		function saveTerjual() {
+			var data = $('#form-modalProductTerjual').serializeJSON();
+			$.ajax({
+				type : 'PUT',
+				url : 'product/',
+				data : JSON.stringify(data),
+				contentType : 'application/json',
+				success : function(d) {
+					console.log(data)
+					refreshTabel();
+				},
+				error : function(d) {
+					console.log(error.message)
+				}
+			});
+		}
+
 		function save() {
 			var method;
 			if (modeSubmit == 'insert') {
@@ -279,8 +296,34 @@
 				$('#modalProduct').modal('hide');
 				method = 'PUT';
 			}
-			if ($('#buyDate').val() > $('#sellingDate').val()) {
-				alert("Tanggal pembelian melebihi tanggal penjualan");
+			if ($('#name').val() == "") {
+				setTimeout(function() {
+					alert("Name must be filled in!");
+				}, 1000);
+			} else if ($('#sellingPrice').val() == "") {
+				setTimeout(function() {
+					alert("Selling Price must number and not null!");
+				}, 1000);
+			} else if ($('#buyPrice').val() == "") {
+				setTimeout(function() {
+					alert("Buying Price must number and not null!");
+				}, 1000);
+			} else if ($('#marketingId').val() == "") {
+				setTimeout(function() {
+					alert("Select one from marketing!");
+				}, 1000);
+			} else if ($('#sellingDate').val() == "") {
+				setTimeout(function() {
+					alert("Select one Selling Date!");
+				}, 1000);
+			} else if ($('#buyDate').val() == "") {
+				setTimeout(function() {
+					alert("Select one Buying Date!");
+				}, 1000);
+			} else if ($('#buyDate').val() > $('#sellingDate').val()) {
+				setTimeout(function() {
+					alert("Tanggal pembelian melebihi tanggal penjualan");
+				}, 1000);
 			} else {
 				$.ajax({
 					type : method,
@@ -290,6 +333,7 @@
 					success : function(d) {
 						console.log(data)
 						refreshTabel();
+
 						if (d == 1) {
 							alert("Nama sudah terdaftar");
 						} else if (d == 2) {
@@ -298,6 +342,7 @@
 							$('#form-product input[type=hidden]').val('');
 							$('#modalProduct').modal('hide');
 						}
+
 						if (method == 'post') {
 							$.notify("Input Success", "success");
 
@@ -324,7 +369,8 @@
 			tableProduct = $('#table-product').DataTable({
 				'searching' : true,
 				'lengthChange' : true,
-				'lengthMenu' : [ 5, 10, 15 ]
+				'lengthMenu' : [ 5, 10, 15 ],
+				'orderData' : true
 			});
 			$('#buyDate').datepicker({
 				autoclose : true,
@@ -337,5 +383,26 @@
 			refreshTabel();
 		});
 	</script>
+	<center>
+		<%
+			// Set refresh, autoload time as 5 menit
+		response.setIntHeader("Refresh", 600);
+
+		// Get current time
+		Calendar calendar = new GregorianCalendar();
+		String am_pm;
+
+		int hour = calendar.get(Calendar.HOUR);
+		int minute = calendar.get(Calendar.MINUTE);
+		int second = calendar.get(Calendar.SECOND);
+
+		if (calendar.get(Calendar.AM_PM) == 0)
+			am_pm = "AM";
+		else
+			am_pm = "PM";
+		/* String CT = hour + ":" + minute + ":" + second + " " + am_pm;
+		out.println("Crrent Time: " + CT + "\n"); */
+		%>
+	</center>
 </body>
 </html>
