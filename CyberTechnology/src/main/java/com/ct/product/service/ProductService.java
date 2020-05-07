@@ -16,5 +16,7 @@ public interface ProductService {
 
 	public Collection<Product> countMarketplace();
 
+	public Product saveTerjual(Product product);
+
 
 }

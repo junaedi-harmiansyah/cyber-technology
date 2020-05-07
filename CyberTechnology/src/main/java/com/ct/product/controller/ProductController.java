@@ -59,4 +59,12 @@ public class ProductController {
 				HttpStatus.OK);
 		return result;
 	}
+
+	@RequestMapping(value = "/saveTerjual", method = RequestMethod.PUT)
+	public ResponseEntity<Product> saveTerjual(@RequestBody Product product) {
+		productService.saveTerjual(product);
+		ResponseEntity<Product> result = new ResponseEntity<Product>(product, HttpStatus.OK);
+		return result;
+
+	}
 }

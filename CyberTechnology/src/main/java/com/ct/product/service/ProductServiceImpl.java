@@ -114,4 +114,12 @@ public class ProductServiceImpl implements ProductService {
 		return productDao.countMarketplace();
 	}
 
+	@Override
+	public Product saveTerjual(Product product) {
+		Product productBefore = productDao.findOne(product.getId());
+		productBefore.setStatus(2);
+		productDao.update(productBefore);
+		return productBefore;
+	}
+
 }

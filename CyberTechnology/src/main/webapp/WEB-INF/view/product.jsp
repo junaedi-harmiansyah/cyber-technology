@@ -19,6 +19,8 @@
 								onclick="insert()">
 								<i class="fa fa-plus"></i>
 							</button>
+							<label style="width:300px;"></label>
+							<label style="width:300px;"></label>
 							<div class="btn-group">
 								<button type="button"
 									class="btn btn-primary btn-bg dropdown-toggle "
@@ -61,10 +63,6 @@
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
-							<!-- <button type="button" class="close" data-dismiss="modal"
-								aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-							</button> -->
 							<h4 class="modal-title">Product</h4>
 						</div>
 						<div class="modal-body">
@@ -166,15 +164,19 @@
 							<div class="modal-body">
 								<div class="row">
 									<div class="col-xs-12">
-										<input type="number" class="form-control" name="id" id="id"
-											placeholder="id">
+										<div class="form-group">
+											<input type="hidden" class="form-control" name="id"
+												id="idTerjual" placeholder="id">
+										</div>
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-xs-12">
-										<center>
-											<label>Product akan di Set Terjual dan akan di Non
-												Active !</label>
+										<h4>
+											<center>
+												<label>Product akan di Set Terjual dan akan di Non
+													Active!</label>
+										</h4>
 										</center>
 									</div>
 								</div>
@@ -225,26 +227,57 @@
 												} else {
 													var status = 'Non Active';
 												}
-												tableProduct.row
-														.add(
-																[
-																		element.name,
-																		element.marketing,
-																		element.discription,
-																		status,
-																		'<center><input class="btn btn-default btn-sm" type="button" value="Edit" data-toggle="modal" data-target="#modalProduct" onclick="loadEdit (\''
-																				+ element.id
-																				+ '\')"> &nbsp;'
-																				+ '<input class="btn btn-default btn-sm" type="button" value="Terjual" data-toggle="modal" data-target="#modalProductTerjual" onclick="loadEdit(\''
-																				+ element.id
-																				+ '\')"> &nbsp;</center>' ])
-														.draw();
+												if (status == "Active") {
+													tableProduct.row
+															.add(
+																	[
+																			element.name,
+																			element.marketing,
+																			element.discription,
+																			status,
+																			'<center><input  class=".btn btn-warning btn-sm" type="button" value="Edit" data-toggle="modal" data-target="#modalProduct" onclick="loadEdit (\''
+																					+ element.id
+																					+ '\')"> &nbsp;'
+																					+ '<input  class=".btn btn-danger btn-sm" type="button" value="Terjual" data-toggle="modal" data-target="#modalProductTerjual" onclick="loadTerjual(\''
+																					+ element.id
+																					+ '\')"></center>' ])
+															.draw();
+												} else {
+													tableProduct.row
+															.add(
+																	[
+																			element.name,
+																			element.marketing,
+																			element.discription,
+																			status,
+																			'<center><input  disabled="disabled" class=".btn-default btn-sm" type="hidden" value="Edit" data-toggle="modal" data-target="#modalProduct" onclick="loadEdit (\''
+																					+ element.id
+																					+ '\')"> &nbsp;'
+																					+ '<input  disabled="disabled" class=".btn-default btn-sm" type="hidden" value="Terjual" data-toggle="modal" data-target="#modalProductTerjual" onclick="loadTerjual(\''
+																					+ element.id
+																					+ '\')"></center>' ])
+															.draw();
+												}
+
 											})
 						},
 						error : function(d) {
 							console.log('Error');
 						}
 					});
+		}
+		function loadTerjual(id) {
+			$.ajax({
+				type : 'GET',
+				url : 'product/' + id,
+				success : function(d) {
+					refreshTabel();
+					$('#idTerjual').val(d.id);
+				},
+				error : function(d) {
+					console.log('Error load terjual');
+				}
+			});
 		}
 
 		function loadEdit(id) {
@@ -271,14 +304,18 @@
 
 		function saveTerjual() {
 			var data = $('#form-modalProductTerjual').serializeJSON();
+			$('modalProductTerjual').modal('hide');
 			$.ajax({
 				type : 'PUT',
-				url : 'product/',
+				url : 'product/saveTerjual',
 				data : JSON.stringify(data),
 				contentType : 'application/json',
 				success : function(d) {
 					console.log(data)
 					refreshTabel();
+					$('#form-modalProductTerjual').trigger("reset");
+					$('#form-modalProductTerjual input[type=hidden]').val('');
+					$('#modalProductTerjual').modal('hide');
 				},
 				error : function(d) {
 					console.log(error.message)

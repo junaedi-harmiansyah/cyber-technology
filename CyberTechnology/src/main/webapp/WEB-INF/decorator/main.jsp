@@ -87,15 +87,16 @@
 <decorator:head></decorator:head>
 
 </head>
-<body class="hold-transition skin-black sidebar-mini">
+<body class="hold-transition skin-black sidebar-lg">
 	<div id="txt"></div>
 	<div class="wrapper">
 
 		<header class="main-header" onload="">
 			<!-- Logo -->
-			<a href="index2.html" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
-				<span class="logo-mini"><b>D</b></span> <!-- logo for regular state and mobile devices -->
-				<span class="logo-lg"><b>Dasboard</b></span>
+
+			<a href="#" class="logo"> <span class="logo-mini"><b>M</b></span>
+				<!-- logo for regular state and mobile devices --> <span
+				class="logo-lg"><b>MENU</b></span>
 			</a>
 
 			<!-- Header Navbar -->
@@ -107,36 +108,16 @@
 				<!-- Navbar Right Menu -->
 				<div class="navbar-custom-menu">
 					<ul class="nav navbar-nav">
-						<!-- User Account Menu -->
-						<li class="dropdown user user-menu">
-							<!-- Menu Toggle Button --> <a href="#" class="dropdown-toggle"
-							data-toggle="dropdown"> <!-- The user image in the navbar-->
-								<img
+						<li class="dropdown user-menu "><a href="#"
+							class="dropdown-toggle" data-toggle="dropdown"> <img
 								src="${pageContext.request.contextPath}/assets/img/employer-login.jpg"
-								class="user-image" alt="User Image"> <!-- hidden-xs hides the username on small devices so only the image appears. -->
-								<span class="hidden-xs"><b>User login</b></span>
-						</a>
-							<ul class="dropdown-menu">
-								<!-- The user image in the menu -->
-								<li class="user-header"><img
-									src="${pageContext.request.contextPath}/assets/img/employer-login.jpg"
-									class="img-circle" alt="User Image">
-
-									<p>
-										User login <small>developer</small>
-									</p></li>
-								<!-- Menu Footer-->
-								<li class="user-footer">
-									<div class="pull-left">
-										<a href="#" class="btn btn-default btn-flat">Profile</a>
-									</div>
-									<div class="pull-right">
-										<a href="${pageContext.request.contextPath}/logout"
-											class="btn btn-default btn-flat">Sign Out</a>
-									</div>
-								</li>
-							</ul>
-						</li>
+								class="user-image" alt="User Image">
+						</a></li>
+					</ul>
+					<ul class="nav navbar-nav">
+						<li class="dropdown"><a href="#" data-toggle="modal"
+							data-target="#signOut" class="fa fa-sign-out"
+							style="font-size: 20px; color: red">Sign Out</a></li>
 					</ul>
 				</div>
 			</nav>
@@ -146,11 +127,15 @@
 			<!-- sidebar: style can be found in sidebar.less -->
 			<section class="sidebar">
 				<ul class="sidebar-menu">
-					<li><a href="index.jsp"><i class="fa fa-home"></i><span>Home</span></a></li>
-					<li><a href="product"><i class="fa fa-list"></i><span>Product</span></a></li>
+					<li><a href="index.jsp"><i class="fa fa-home"
+							style='font-size: 48px;'></i><span><h4>Home</h4></span></a></li>
+					<li><a href="product"><i class="fa fa-folder"
+							data-toggle="tooltip" title="Daftar Monitoring Product!"
+							style='font-size: 48px; color: yellow'></i>
+							<h4>Product</h4></a></li>
 					<!-- <li><a href="biodata"><i class="fa fa-user"></i><span>Biodata</span></a></li>
 					<li><a href="batch"><i class="fa fa-book"></i><span>Batch</span></a></li>
-					<li><a href="clazz"><i class="fa fa-folder"></i><span>Class</span></a></li> -->
+					<li><a href="clazz"><i class="fa fa-listfa "></i><span>Class</span></a></li> -->
 				</ul>
 			</section>
 			<!-- /.sidebar -->
@@ -183,6 +168,45 @@
 		<div class="control-sidebar-bg"></div>
 	</div>
 	<!-- ./wrapper -->
+	<!-- form sign out -->
+	<form id="form-signOut">
+		<div class="modal fade" id="signOut">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Sign Out</h4>
+						<div class="modal-body">
+							<div class="row">
+								<div class="col-xs-12">
+									<h4>
+										<center>
+											<label>Sign out dari halaman ini!</label>
+									</h4>
+									</center>
+								</div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default pull-left"
+								data-dismiss="modal">Cancel</button>
+							<button type="button" class="btn btn-primary" onclick="signOut()">Ok</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+
+
+
+	<script>
+		function signOut() {
+			window.location.href = '${pageContext.request.contextPath}/logout';
+		}
+		$(document).ready(function() {
+			$('[data-toggle="tooltip"]').tooltip();
+		});
+	</script>
 
 </body>
 </html>
