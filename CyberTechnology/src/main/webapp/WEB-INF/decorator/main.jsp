@@ -123,14 +123,13 @@
 			</nav>
 		</header>
 		<!-- Left side column. contains the logo and sidebar -->
-		<aside class="main-sidebar">
+		<aside class="main-sidebar ">
 			<!-- sidebar: style can be found in sidebar.less -->
 			<section class="sidebar">
 				<ul class="sidebar-menu">
 					<li><a href="index.jsp"><i class="fa fa-home"
 							style='font-size: 48px;'></i><span><h4>Home</h4></span></a></li>
 					<li><a href="product"><i class="fa fa-folder"
-							data-toggle="tooltip" title="Daftar Monitoring Product!"
 							style='font-size: 48px; color: yellow'></i>
 							<h4>Product</h4></a></li>
 					<!-- <li><a href="biodata"><i class="fa fa-user"></i><span>Biodata</span></a></li>
@@ -203,9 +202,6 @@
 		function signOut() {
 			window.location.href = '${pageContext.request.contextPath}/logout';
 		}
-		$(document).ready(function() {
-			$('[data-toggle="tooltip"]').tooltip();
-		});
 	</script>
 
 </body>

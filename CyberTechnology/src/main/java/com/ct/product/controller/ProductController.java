@@ -1,6 +1,7 @@
 package com.ct.product.controller;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ct.product.model.Product;
 import com.ct.product.service.ProductService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 
 @RestController
 @RequestMapping("/product")
@@ -53,11 +57,15 @@ public class ProductController {
 	}
 
 	@RequestMapping(value = "/countMarketplace", method = RequestMethod.GET)
-	public ResponseEntity<Collection<Product>> countMarketplace() {
-		Collection<Product> listOfProduct = productService.countMarketplace();
-		ResponseEntity<Collection<Product>> result = new ResponseEntity<Collection<Product>>(listOfProduct,
-				HttpStatus.OK);
-		return result;
+	public List<String> countMarketplace() throws JsonProcessingException {
+		List<String> listOfProduct = productService.countMarketplace();
+		/*
+		 * ObjectMapper Obj = new ObjectMapper(); String json =
+		 * Obj.writeValueAsString(result);
+		 */
+		String json = new Gson().toJson(listOfProduct);
+		System.out.println(json);
+		return listOfProduct;
 	}
 
 	@RequestMapping(value = "/saveTerjual", method = RequestMethod.PUT)

@@ -3,6 +3,7 @@ package com.ct.product.service;
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -110,7 +111,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public Collection<Product> countMarketplace() {
+	public List<String> countMarketplace() {
 		return productDao.countMarketplace();
 	}
 

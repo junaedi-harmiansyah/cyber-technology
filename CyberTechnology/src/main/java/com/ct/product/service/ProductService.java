@@ -1,6 +1,7 @@
 package com.ct.product.service;
 
 import java.util.Collection;
+import java.util.List;
 
 import com.ct.product.model.Product;
 
@@ -14,7 +15,7 @@ public interface ProductService {
 
 	public Product findOne(Integer id);
 
-	public Collection<Product> countMarketplace();
+	public List<String> countMarketplace();
 
 	public Product saveTerjual(Product product);
 

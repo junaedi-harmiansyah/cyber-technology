@@ -1,6 +1,7 @@
 package com.ct.product.dao;
 
 import java.util.Collection;
+import java.util.List;
 
 import com.ct.product.model.Product;
 
@@ -16,7 +17,7 @@ public interface ProductDao {
 
 	public Product findOne(Integer id);
 
-	public Collection<Product> countMarketplace();
+	public List<String> countMarketplace();
 
 
 }
