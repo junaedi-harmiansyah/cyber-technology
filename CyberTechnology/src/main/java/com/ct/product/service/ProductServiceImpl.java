@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.ct.controller.UserController;
 import com.ct.product.dao.ProductDao;
 import com.ct.product.model.Product;
 
@@ -25,8 +26,8 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public Integer save(Product product) {
-		product.setCreateBy("developer");
+	public Integer save(Product product, String username) {
+		product.setCreateBy(username);
 		product.setCreateDate(new Date());
 		product.setIsActive(1);
 		if (product.getBuyPrice() != null && product.getSellingPrice() != null) {
@@ -47,7 +48,7 @@ public class ProductServiceImpl implements ProductService {
 
 		}
 
-		product.setModifiedBy("developer");
+		product.setModifiedBy(username);
 		product.setModifiedDate(new Date());
 		product.setStatus(1);
 

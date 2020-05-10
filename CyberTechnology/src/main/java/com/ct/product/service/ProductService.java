@@ -9,7 +9,7 @@ public interface ProductService {
 
 	public Collection<Product> findAll();
 
-	public Integer save(Product product);
+	public Integer save(Product product, String username);
 
 	public Product update(Product product);
 

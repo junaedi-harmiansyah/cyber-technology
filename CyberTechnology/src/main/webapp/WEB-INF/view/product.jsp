@@ -19,8 +19,8 @@
 								onclick="insert()">
 								<i class="fa fa-plus"></i>
 							</button>
-							<label style="width:300px;"></label>
-							<label style="width:300px;"></label>
+							<label style="width: 300px;"></label> <label
+								style="width: 300px;"></label>
 							<div class="btn-group">
 								<button type="button"
 									class="btn btn-primary btn-bg dropdown-toggle "
@@ -418,6 +418,18 @@
 				format : 'yyyy-mm-dd'
 			});
 			refreshTabel();
+		});
+		$(document).ready(function() {
+			$.ajax({
+				type : 'GET',
+				url : 'secure/user/username/',
+				success : function(d) {
+					console.log(d);
+				},
+				error : function(d) {
+					console.log('Error load terjual');
+				}
+			});
 		});
 	</script>
 	<center>

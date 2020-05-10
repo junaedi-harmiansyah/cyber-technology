@@ -87,7 +87,7 @@
 <decorator:head></decorator:head>
 
 </head>
-<body class="hold-transition skin-black sidebar-lg">
+<body class="hold-transition skin-white sidebar-lg">
 	<div id="txt"></div>
 	<div class="wrapper">
 
@@ -113,12 +113,14 @@
 								src="${pageContext.request.contextPath}/assets/img/employer-login.jpg"
 								class="user-image" alt="User Image">
 						</a></li>
+
 					</ul>
 					<ul class="nav navbar-nav">
 						<li class="dropdown"><a href="#" data-toggle="modal"
 							data-target="#signOut" class="fa fa-sign-out"
 							style="font-size: 20px; color: red">Sign Out</a></li>
 					</ul>
+
 				</div>
 			</nav>
 		</header>
@@ -128,13 +130,17 @@
 			<section class="sidebar">
 				<ul class="sidebar-menu">
 					<li><a href="index.jsp"><i class="fa fa-home"
-							style='font-size: 48px;'></i><span><h4>Home</h4></span></a></li>
-					<li><a href="product"><i class="fa fa-folder"
-							style='font-size: 48px; color: yellow'></i>
+							style='font-size: 48px; color:black'></i><span><h4>Home</h4></span></a></li>
+					<li><a href="product"><i class="fa fa-database"
+							style='font-size: 48px; color: gold'></i>
 							<h4>Product</h4></a></li>
-					<!-- <li><a href="biodata"><i class="fa fa-user"></i><span>Biodata</span></a></li>
-					<li><a href="batch"><i class="fa fa-book"></i><span>Batch</span></a></li>
-					<li><a href="clazz"><i class="fa fa-listfa "></i><span>Class</span></a></li> -->
+					<li><a href="finance"><i class="fa fa-money"
+							style='font-size: 48px; color: red'></i>
+							<h4>Finance</h4></a></li>
+					<li><a href="user"><i class="fa fa-address-card"
+							style='font-size: 48px; color: blue'></i><span><h4>User</h4></span></a></li>
+					<li><a href="market"><i class="fa fa-bullhorn"
+							style='font-size: 48px; color: green'></i><span><h4>Market</h4></span></a></li>
 				</ul>
 			</section>
 			<!-- /.sidebar -->
@@ -202,6 +208,18 @@
 		function signOut() {
 			window.location.href = '${pageContext.request.contextPath}/logout';
 		}
+		$(document).ready(function() {
+			$.ajax({
+				type : 'GET',
+				url : 'secure/user/username/',
+				success : function(d) {
+					console.log(d);
+				},
+				error : function(d) {
+					console.log('Error load terjual');
+				}
+			});
+		});
 	</script>
 
 </body>

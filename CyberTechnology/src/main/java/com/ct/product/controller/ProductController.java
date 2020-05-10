@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ct.controller.UserController;
 import com.ct.product.model.Product;
 import com.ct.product.service.ProductService;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -27,6 +28,8 @@ public class ProductController {
 	 */
 	@Autowired
 	private ProductService productService;
+	@Autowired
+	private UserController UserController;
 
 	@RequestMapping(value = "/findAll", method = RequestMethod.GET)
 	public ResponseEntity<Collection<Product>> findAll() {
@@ -38,7 +41,8 @@ public class ProductController {
 
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	public Integer save(@RequestBody Product product) {
-		Integer result = productService.save(product);
+		String username = UserController.getUserLogin();
+		Integer result = productService.save(product, username);
 		return result;
 	}
 

@@ -4,12 +4,13 @@ import java.util.Collection;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ct.dao.UserDao;
 import com.ct.model.User;
-
 
 @Service
 @Transactional
@@ -26,7 +27,7 @@ public class UserServiceImpl implements UserService {
 	public Collection<User> findAll() {
 		return userDao.findAll();
 	}
-	
+
 	@Override
 	public void save(User user, Integer sessionId) {
 		user.setCreatedOn(new Date());
@@ -62,7 +63,7 @@ public class UserServiceImpl implements UserService {
 	public Collection<User> search(String find) {
 		return userDao.search(find);
 	}
-	
+
 	@Override
 	public User findByUsername(String username) {
 		return userDao.findByUsername(username);
@@ -76,4 +77,5 @@ public class UserServiceImpl implements UserService {
 		user.setDelete(true);
 		return userDao.update(user);
 	}
+
 }

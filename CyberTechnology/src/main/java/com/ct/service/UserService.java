@@ -23,4 +23,5 @@ public interface UserService {
 	public User findByUsername(String name);
 	
 	public User deleteDisabled(Integer id, Integer sessionId);
+
 }
