@@ -14,7 +14,7 @@ import org.springframework.stereotype.Controller;
 public class PathConfigur {
 
 	public PathConfigur() throws IOException {
-		generatedFile();
+		//generatedFile();
 	}
 
 	private void generatedFile() throws IOException {
